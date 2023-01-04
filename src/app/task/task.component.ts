@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -7,4 +7,19 @@ import { Component, Input } from '@angular/core';
 })
 export class TaskComponent {
   @Input() texto: string = '';
+  @Output() onEliminar: EventEmitter<any> = new EventEmitter();
+
+  isTareaCompletada: boolean = false;
+
+  toggleTareaCompletada() {
+    if (this.isTareaCompletada) {
+      console.log(`${this.texto} completada`);
+    } else {
+      console.log(`${this.texto} sin completar`);
+    }
+  }
+
+  eliminar() {
+    this.onEliminar.emit(null);
+  }
 }
